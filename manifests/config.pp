@@ -1,9 +1,9 @@
 class memcached::config {
-  require github::config
+  require boxen::config
 
-  $datadir    = "${github::config::datadir}/memcached"
-  $executable = "${github::config::homebrewdir}/bin/memcached"
-  $logdir     = "${github::config::logdir}/memcached"
+  $datadir    = "${boxen::config::datadir}/memcached"
+  $executable = "${boxen::config::homebrewdir}/bin/memcached"
+  $logdir     = "${boxen::config::logdir}/memcached"
   $logfile    = "${logdir}/console.log"
   $port       = 21211
 
@@ -11,10 +11,10 @@ class memcached::config {
     ensure => directory
   }
 
-  file { '/Library/LaunchDaemons/com.github.memcached.plist':
-    content => template('memcached/com.github.memcached.plist.erb'),
+  file { '/Library/LaunchDaemons/com.boxen.memcached.plist':
+    content => template('memcached/com.boxen.memcached.plist.erb'),
     group   => 'wheel',
-    notify  => Service['com.github.memcached'],
+    notify  => Service['com.boxen.memcached'],
     owner   => 'root'
   }
 }
