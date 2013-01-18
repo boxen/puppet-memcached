@@ -11,10 +11,10 @@ class memcached::config {
     ensure => directory
   }
 
-  file { '/Library/LaunchDaemons/com.boxen.memcached.plist':
-    content => template('memcached/com.boxen.memcached.plist.erb'),
+  file { '/Library/LaunchDaemons/dev.memcached.plist':
+    content => template('memcached/dev.memcached.plist.erb'),
     group   => 'wheel',
-    notify  => Service['com.boxen.memcached'],
+    notify  => Service['dev.memcached'],
     owner   => 'root'
   }
 }
