@@ -1,5 +1,21 @@
 class memcached {
+  require homebrew
   require memcached::config
+
+  file { [$memcached::config::datadir, $memcached::config::logdir]:
+    ensure => directory
+  }
+
+  file { '/Library/LaunchDaemons/dev.memcached.plist':
+    content => template('memcached/dev.memcached.plist.erb'),
+    group   => 'wheel',
+    notify  => Service['dev.memcached'],
+    owner   => 'root'
+  }
+
+  homebrew::formula { 'memcached':
+    before => Package['boxen/brews/memcached'],
+  }
 
   package { 'boxen/brews/memcached':
     ensure => '1.4.13-boxen1',
