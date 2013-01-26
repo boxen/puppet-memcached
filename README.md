@@ -3,6 +3,7 @@
 Requires the following boxen modules:
 
 * [boxen](https://github.com/boxen/puppet-boxen)
+* [homebrew](https://github.com/boxen/puppet-homebrew)
 
 ## Usage
 
