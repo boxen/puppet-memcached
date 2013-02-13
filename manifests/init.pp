@@ -1,6 +1,6 @@
 class memcached {
-  require homebrew
-  require memcached::config
+  include homebrew
+  include memcached::config
 
   file { [$memcached::config::datadir, $memcached::config::logdir]:
     ensure => directory

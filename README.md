@@ -1,17 +1,19 @@
 # Memcached Puppet Module for Boxen
 
-Requires the following boxen modules:
-
-* [boxen](https://github.com/boxen/puppet-boxen)
-* [homebrew](https://github.com/boxen/puppet-homebrew)
-
 ## Usage
 
 ```puppet
 include memcached
 ```
 
-### Environment
+## Required Puppet Modules
+
+* boxen
+* homebrew
+* stdlib
+
+
+## Environment
 
 Once installed, you can access the following variables in your environment, projects, etc:
 
