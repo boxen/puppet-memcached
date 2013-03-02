@@ -1,4 +1,4 @@
-class memcached::libmemcached {
+class memcached::lib {
   include memcached
 
   homebrew::formula { 'libmemcached':
