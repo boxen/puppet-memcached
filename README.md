@@ -6,6 +6,11 @@
 include memcached
 ```
 
+The `libmemcached` library is also available:
+```puppet
+include memcached::lib
+```
+
 ## Required Puppet Modules
 
 * boxen
