@@ -1,6 +1,8 @@
-class memcached {
+class memcached($port = 21211) {
   include homebrew
-  include memcached::config
+  class { 'memcached::config':
+    port => $port,
+  }
 
   file { [$memcached::config::datadir, $memcached::config::logdir]:
     ensure => directory
