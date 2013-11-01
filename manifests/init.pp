@@ -26,7 +26,7 @@ class memcached(
   }
 
   ~>
-  class { 'memcached:package':
+  class { 'memcached::package':
     ensure  => $ensure,
 
     package => $package,
