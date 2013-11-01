@@ -23,13 +23,13 @@ class memcached::config(
       $datadir,
       $logdir
     ]:
-    ensure => $dir_ensure ;
+      ensure => $dir_ensure ;
 
-  '/Library/LaunchDaemons/dev.memcached.plist':
-    content => template('memcached/dev.memcached.plist.erb'),
-    group   => 'wheel',
-    owner   => 'root'
-
+    '/Library/LaunchDaemons/dev.memcached.plist':
+      content => template('memcached/dev.memcached.plist.erb'),
+      group   => 'wheel',
+      owner   => 'root' ;
+  }
 
   if $::operatingsystem == 'Darwin' {
     include boxen::config
