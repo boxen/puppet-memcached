@@ -1,39 +1,43 @@
-class memcached {
-  include homebrew
-  include memcached::config
+class memcached(
+  $ensure     = $memcached::params::ensure,
 
-  file { [$memcached::config::datadir, $memcached::config::logdir]:
-    ensure => directory
+  $package    = $memcached::params::package,
+  $version    = $memcached::params::version,
+
+  $datadir    = $memcached::params::datadir,
+  $executable = $memcached::params::executable,
+  $logdir     = $memcached::params::logdir,
+  $host       = $memcached::params::host,
+  $port       = $memcached::params::port,
+  $user       = $memcached::params::user,
+
+  $enable     = $memcached::params::enable,
+) inherits memcached::params {
+
+  class { 'memcached::config':
+    ensure     => $ensure,
+
+    datadir    => $datadir,
+    executable => $executable,
+    logdir     => $logdir,
+    host       => $host,
+    port       => $port,
+    user       => $user,
   }
 
-  file { '/Library/LaunchDaemons/dev.memcached.plist':
-    content => template('memcached/dev.memcached.plist.erb'),
-    group   => 'wheel',
-    notify  => Service['dev.memcached'],
-    owner   => 'root'
+  ~>
+  class { 'memcached:package':
+    ensure  => $ensure,
+
+    package => $package,
+    version => $version,
   }
 
-  homebrew::formula { 'memcached':
-    before => Package['boxen/brews/memcached'],
+  ~>
+  class { 'memcached::service':
+    ensure => $ensure,
+
+    enable => $enable,
   }
 
-  package { 'boxen/brews/memcached':
-    ensure => '1.4.13-boxen1',
-    notify => Service['dev.memcached']
-  }
-
-  service { 'dev.memcached':
-    ensure  => running,
-    require => Package['boxen/brews/memcached']
-  }
-
-  service { 'com.boxen.memcached': # replaced by dev.memcached
-    before => Service['dev.memcached'],
-    enable => false
-  }
-
-  file { "${boxen::config::envdir}/memcached.sh":
-    content => template('memcached/env.sh.erb'),
-    require => File[$boxen::config::envdir]
-  }
 }
