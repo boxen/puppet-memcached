@@ -23,6 +23,8 @@ class memcached(
     host       => $host,
     port       => $port,
     user       => $user,
+
+    notify     => Service['memcached'],
   }
 
   ~>

@@ -17,6 +17,7 @@ class memcached::service(
   service { 'dev.memcached':
     ensure => $real_ensure,
     enable => $enable,
+    alias  => 'memcached',
   }
 
 }
