@@ -31,4 +31,4 @@ Once installed, you can access the following variables in your environment, proj
 
 For Rails development with the [dalli](https://github.com/mperham/dalli) client, add to `config/environments/development.rb`:
 
-    config.cache_store = :dalli_store, "127.0.0.1:#{ENV['BOXEN_MEMCACHED_PORT'] || 11211}"
+    config.cache_store = :dalli_store, "localhost:#{ENV['BOXEN_MEMCACHED_PORT'] || 11211}"
