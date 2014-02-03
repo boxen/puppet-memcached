@@ -1,9 +1,9 @@
 class memcached::package(
-  $ensure     = $memcached::params::ensure,
+  $ensure     = undef,
 
-  $package    = $memcached::params::package,
-  $version    = $memcached::params::version,
-) inherits memcached::params {
+  $package    = undef,
+  $version    = undef,
+) {
 
   $real_ensure = $ensure ? {
     present => $version,

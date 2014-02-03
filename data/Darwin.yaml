@@ -1,0 +1,12 @@
+---
+memcached::service::servicename: dev.memcached
+
+memcached::package:    'boxen/brews/memcached'
+memcached::version:    '1.4.13-boxen1'
+
+memcached::datadir:    "%{boxen::config::datadir}/memcached"
+memcached::executable: "%{boxen::config::homebrewdir}/bin/memcached"
+memcached::logdir:     "%{boxen::config::logdir}/memcached"
+memcached::host:       "127.0.0.1"
+memcached::port:       "21211"
+memcached::user:       "%{::boxen_user}"
