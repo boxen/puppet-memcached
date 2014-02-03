@@ -1,0 +1,11 @@
+---
+memcached::service::servicename: memcached
+
+memcached::package:    'memcached'
+memcached::version:    'installed'
+
+memcached::datadir:    "%{boxen::config::datadir}/memcached"
+memcached::logdir:     "/var/log/memcached"
+memcached::host:       "%{::ipaddress}"
+memcached::port:       "11211"
+memcached::user:       "root"

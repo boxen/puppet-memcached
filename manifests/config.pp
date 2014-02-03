@@ -1,13 +1,14 @@
 class memcached::config(
-  $ensure     = $memcached::params::ensure,
+  $ensure     = undef,
 
-  $datadir    = $memcached::params::datadir,
-  $executable = $memcached::params::executable,
-  $logdir     = $memcached::params::logdir,
-  $host       = $memcached::params::host,
-  $port       = $memcached::params::port,
-  $user       = $memcached::params::user,
-) inherits memcached::params {
+  $datadir    = undef,
+  $executable = undef,
+  $logdir     = undef,
+  $host       = undef,
+  $port       = undef,
+  $user       = undef,
+) {
+  include boxen::config
 
   $dir_ensure = $ensure ? {
     present => directory,
@@ -24,16 +25,9 @@ class memcached::config(
       $logdir
     ]:
       ensure => $dir_ensure ;
-
-    '/Library/LaunchDaemons/dev.memcached.plist':
-      content => template('memcached/dev.memcached.plist.erb'),
-      group   => 'wheel',
-      owner   => 'root' ;
   }
 
   if $::operatingsystem == 'Darwin' {
-    include boxen::config
-
     boxen::env_script { 'memcached':
       ensure   => $ensure,
       content  => template('memcached/env.sh.erb'),
@@ -42,6 +36,12 @@ class memcached::config(
 
     file { "${boxen::config::envdir}/memcached.sh":
       ensure => absent,
+    }
+
+    file { '/Library/LaunchDaemons/dev.memcached.plist':
+      content => template('memcached/dev.memcached.plist.erb'),
+      group   => 'wheel',
+      owner   => 'root',
     }
   }
 

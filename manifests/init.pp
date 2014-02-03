@@ -1,18 +1,18 @@
 class memcached(
-  $ensure     = $memcached::params::ensure,
+  $ensure     = undef,
 
-  $package    = $memcached::params::package,
-  $version    = $memcached::params::version,
+  $package    = undef,
+  $version    = undef,
 
-  $datadir    = $memcached::params::datadir,
-  $executable = $memcached::params::executable,
-  $logdir     = $memcached::params::logdir,
-  $host       = $memcached::params::host,
-  $port       = $memcached::params::port,
-  $user       = $memcached::params::user,
+  $datadir    = undef,
+  $executable = undef,
+  $logdir     = undef,
+  $host       = undef,
+  $port       = undef,
+  $user       = undef,
 
-  $enable     = $memcached::params::enable,
-) inherits memcached::params {
+  $enable     = undef,
+) {
 
   class { 'memcached::config':
     ensure     => $ensure,
