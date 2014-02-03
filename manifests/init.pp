@@ -13,6 +13,21 @@ class memcached(
 
   $enable     = undef,
 ) {
+  validate_string(
+    $ensure,
+    $package,
+    $version,
+    $datadir,
+    $executable,
+    $logdir,
+    $host,
+    $port,
+    $user,
+  )
+
+  validate_bool(
+    $enable,
+  )
 
   class { 'memcached::config':
     ensure     => $ensure,
