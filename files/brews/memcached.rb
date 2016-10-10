@@ -1,26 +1,36 @@
 require 'formula'
 
 class Memcached < Formula
-  url "http://memcached.googlecode.com/files/memcached-1.4.13.tar.gz"
-  homepage 'http://memcached.org/'
-  sha1 'd9a48d222de53a2603fbab6156d48d0e8936ee92'
-  version '1.4.13-boxen1'
+  desc "High performance, distributed memory object caching system"
+  homepage "https://memcached.org/"
+  url "https://www.memcached.org/files/memcached-1.4.24.tar.gz"
+  sha256 "08a426c504ecf64633151eec1058584754d2f54e62e5ed2d6808559401617e55"
 
-  depends_on 'libevent'
-
-  def options
-    [
-      ["--enable-sasl", "Enable SASL support -- disables ASCII protocol!"],
-      ["--enable-sasl-pwdb", "Enable SASL with memcached's own plain text password db support -- disables ASCII protocol!"],
-    ]
+  bottle do
+    cellar :any
+    sha256 "4f9c26fb5389e049559ec7c6b3286d707322ebb27f69753ba13bcb443f277ebe" => :sierra
+    sha256 "da6347788e34f2914ec939c1f14d5a36b70ce2e546d04bf95123a01f98084674" => :el_capitan
+    sha256 "5524972e73c753e43289f06eb615a3100831eb7c33ce15489ea65d2904344acf" => :yosemite
+    sha256 "0ff0b4273be5860850878f391e4cc6f1492fe13ffe7f80388634511210ff473f" => :mavericks
+    sha256 "ad37c20bd1dfc1275c055ec33cb3fae594ed22463a264b80f08b01db3f7d0578" => :mountain_lion
   end
 
+  option "with-sasl", "Enable SASL support -- disables ASCII protocol!"
+  option "with-sasl-pwdb", "Enable SASL with memcached's own plain text password db support -- disables ASCII protocol!"
+
+  depends_on "libevent"
+
+  deprecated_option "enable-sasl" => "with-sasl"
+  deprecated_option "enable-sasl-pwdb" => "with-sasl-pwdb"
+
+  conflicts_with "mysql-cluster", :because => "both install `bin/memcached`"
+
   def install
-    args = ["--prefix=#{prefix}"]
-    args << "--enable-sasl" if ARGV.include? "--enable-sasl"
-    args << "--enable-sasl-pwdb" if ARGV.include? "--enable-sasl-pwdb"
+    args = ["--prefix=#{prefix}", "--disable-coverage"]
+    args << "--enable-sasl" if build.with? "sasl"
+    args << "--enable-sasl-pwdb" if build.with? "sasl-pwdb"
 
     system "./configure", *args
-    system "make install"
+    system "make", "install"
   end
 end
