@@ -2,7 +2,7 @@
 memcached::service::servicename: dev.memcached
 
 memcached::package:    'boxen/brews/memcached'
-memcached::version:    '1.4.13-boxen1'
+memcached::version:    '1.4.24-boxen1'
 
 memcached::datadir:    "%{boxen::config::datadir}/memcached"
 memcached::executable: "%{boxen::config::homebrewdir}/bin/memcached"

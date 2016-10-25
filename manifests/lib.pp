@@ -6,7 +6,7 @@ class memcached::lib {
   }
 
   package { 'boxen/brews/libmemcached':
-    ensure  => '1.0.15-boxen1',
+    ensure  => '1.4.24-boxen1',
     require => Package['boxen/brews/memcached'],
   }
 
