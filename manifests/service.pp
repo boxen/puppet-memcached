@@ -1,3 +1,4 @@
+# Internal: manages memcached service
 class memcached::service(
   $ensure      = undef,
   $enable      = undef,

@@ -1,3 +1,4 @@
+# Internal: Manage configuration files for memcached
 class memcached::config(
   $ensure     = undef,
 
