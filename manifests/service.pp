@@ -10,7 +10,7 @@ class memcached::service(
     default => stopped,
   }
 
-  if $osfamily == 'Darwin' {
+  if $::operatingsystem == 'Darwin' {
     service { 'com.boxen.memcached':
       ensure => stopped,
       enable => false,
