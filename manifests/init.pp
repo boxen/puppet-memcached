@@ -1,3 +1,8 @@
+# Public: Install and configure memcached from homebrew.
+#
+# Examples
+#
+#   include memcached
 class memcached(
   $ensure     = undef,
 

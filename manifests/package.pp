@@ -1,3 +1,4 @@
+# Internal: install the memcached package
 class memcached::package(
   $ensure     = undef,
 

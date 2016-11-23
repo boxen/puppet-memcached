@@ -1,3 +1,4 @@
+# Internal: install the memcached library
 class memcached::lib {
   include memcached
 
